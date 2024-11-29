@@ -1,5 +1,6 @@
 "use client";
 import DefaultLayout from "@/app/layouts/DefaultLayout";
+import AdjustmentForm from "@/components/AdjustmentForm";
 import CircleVisualizer from "@/components/CircleCanvas";
 import InputForm from "@/components/InputForm";
 import { useState } from "react";
@@ -7,7 +8,8 @@ import { useState } from "react";
 const HomePage = () => {
   const [textInput, setTextInput] = useState<string>("");
   const [wordMap, setWordMap] = useState<{ [key: string]: number }>({});
-
+  const [scaleIndex, setScaleIndex] = useState(1);
+  const [opacityIndex, setOpacityIndex] = useState(100);
   // Function to count words and update wordMap
   const countWords = (text: string) => {
     const words = text.toLowerCase().split(/\s+/); // Split by whitespace and make lowercase
@@ -42,8 +44,17 @@ const HomePage = () => {
           setInputText={setTextInput}
           onSubmit={handleFormSubmit} // Pass the form submit handler
         />
-        <CircleVisualizer wordMap={wordMap} />{" "}
-        {/* Pass wordMap to CircleVisualizer */}
+        <CircleVisualizer
+          wordMap={wordMap}
+          opacityIndex={opacityIndex}
+          scaleIndex={scaleIndex}
+        />
+        <AdjustmentForm
+          setOpacityIndex={setOpacityIndex}
+          setScaleIndex={setScaleIndex}
+          scaleIndex={scaleIndex}
+          opacityIndex={opacityIndex}
+        />
       </div>
     </DefaultLayout>
   );

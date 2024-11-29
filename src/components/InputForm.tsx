@@ -28,7 +28,7 @@ const InputForm = ({ inputText, setInputText, onSubmit }: InputFormProps) => {
 
   return (
     <form
-      className="w-full mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+      className="w-full mx-auto mt-8 p-6 bg-white rounded-lg shadow-md min-w-md"
       onSubmit={handleSubmit}
     >
       <div className="space-y-4">

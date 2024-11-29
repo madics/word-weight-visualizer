@@ -1,49 +1,34 @@
 import React, { useState } from "react";
 
-interface CircleProps {
-  value: number;
-  onClick: (value: number) => void;
-}
-
-const Circle: React.FC<CircleProps> = ({ value, onClick }) => {
-  const diameter = value * 10; // The value affects the diameter (value * 10 is an example scaling)
-
-  return (
-    <div
-      onClick={() => onClick(value)}
-      className="flex justify-center items-center cursor-pointer"
-      style={{
-        width: `${diameter}px`,
-        height: `${diameter}px`,
-        borderRadius: "50%",
-        backgroundColor: "#3498db", // You can change the color
-      }}
-    >
-      <span className="text-white">{value}</span>
-    </div>
-  );
-};
-
 interface CircleVisualizerProps {
   wordMap: { [key: string]: number };
+  scaleIndex: number;
+  opacityIndex: number;
 }
 
-const CircleVisualizer = ({ wordMap }: CircleVisualizerProps) => {
+const CircleVisualizer = ({
+  wordMap,
+  scaleIndex,
+  opacityIndex,
+}: CircleVisualizerProps) => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center p-9 ">
       {Object.entries(wordMap).map(([word, count]) => {
-        const size = Math.min(count * 20, 200); // Limit the max size to 200px
+        const size = Math.min(count * 6, 80); // Limit the max size to 200px
         return (
           <div
             key={word}
-            className="flex items-center justify-center m-2"
+            className="flex items-center  justify-center mx-1 w-fit h-fit px-1 my-auto max-h-fit"
             style={{
-              width: `${size}px`,
-              height: `${size}px`,
-              borderRadius: "50%",
-              backgroundColor: "#3498db",
-              color: "white",
-              fontSize: "14px",
+              //width: `${size}px`,
+              //height: `${size}px`,
+              //borderRadius: "50%",
+              //backgroundColor: "#3498db",
+              color: "black",
+              fontWeight: "bold",
+              opacity: `${0.1 + size * 0.05}`,
+              fontSize: `${size / scaleIndex}px`, //"14px",
+              lineHeight: `${scaleIndex * 0.01}`, //"0.1", // Compresses text within its bounding box
             }}
           >
             {word}
